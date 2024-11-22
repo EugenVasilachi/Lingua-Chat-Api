@@ -1,29 +1,27 @@
 import requests
 import firebase_admin
 from firebase_admin import credentials, storage, firestore
-import os
-import json
 
-# cred = credentials.Certificate("firebase-adminsdk.json")
-# firebase_admin.initialize_app(cred, {"storageBucket": "rebeldot-7a26b.appspot.com"})
+cred = credentials.Certificate("firebase-adminsdk.json")
+firebase_admin.initialize_app(cred, {"storageBucket": "rebeldot-7a26b.appspot.com"})
 
-firebase_admin_sdk_json = os.getenv("FIREBASE_ADMIN_SDK_JSON")
-try:
-    if firebase_admin_sdk_json:
-        firebase_creds = json.loads(firebase_admin_sdk_json)
-        cred = credentials.Certificate(firebase_creds)
-        firebase_admin.initialize_app(
-            cred, {"storageBucket": "rebeldot-7a26b.appspot.com"}
-        )
-    else:
-        print(
-            "Error: FIREBASE_ADMIN_SDK_JSON environment variable is missing or empty."
-        )
+# firebase_admin_sdk_json = os.getenv("FIREBASE_ADMIN_SDK_JSON")
+# try:
+#     if firebase_admin_sdk_json:
+#         firebase_creds = json.loads(firebase_admin_sdk_json)
+#         cred = credentials.Certificate(firebase_creds)
+#         firebase_admin.initialize_app(
+#             cred, {"storageBucket": "rebeldot-7a26b.appspot.com"}
+#         )
+#     else:
+#         print(
+#             "Error: FIREBASE_ADMIN_SDK_JSON environment variable is missing or empty."
+#         )
 
-except json.JSONDecodeError:
-    print(
-        "Error: Failed to decode FIREBASE_ADMIN_SDK_JSON as JSON. Check the format in GitHub secrets."
-    )
+# except json.JSONDecodeError:
+#     print(
+#         "Error: Failed to decode FIREBASE_ADMIN_SDK_JSON as JSON. Check the format in GitHub secrets."
+#     )
 
 bucket = storage.bucket()
 
