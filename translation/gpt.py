@@ -4,8 +4,8 @@ from langchain_core.messages import HumanMessage, SystemMessage
 import openai
 import os
 
-openai.api_key = os.getenv("API_KEY")
-model = ChatOpenAI(model="gpt-4o", api_key=os.getenv("API_KEY"))
+openai.api_key = os.getenv("OPENAI_API_KEY")
+model = ChatOpenAI(model="gpt-4o", api_key=os.getenv("OPENAI_API_KEY"))
 
 
 def translate_text(text, source_lang, target_lang):
