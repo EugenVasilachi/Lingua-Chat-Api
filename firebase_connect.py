@@ -1,8 +1,11 @@
 import requests
 import firebase_admin
 from firebase_admin import credentials, storage, firestore
+import os
+import json
 
-cred = credentials.Certificate("firebase-adminsdk.json")
+firebase_admin_sdk_json = os.getenv("FIREBASE_ADMIN_SDK_JSON")
+cred = credentials.Certificate(json.loads(firebase_admin_sdk_json))
 firebase_admin.initialize_app(cred, {"storageBucket": "rebeldot-7a26b.appspot.com"})
 
 bucket = storage.bucket()
