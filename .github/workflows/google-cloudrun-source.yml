@@ -75,7 +75,6 @@ jobs:
           source: "./"
           env_vars: |
             OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-            FIREBASE_ADMIN_SDK_JSON=${{ secrets.FIREBASE_ADMIN_SDK_JSON }}
 
       # If required, use the Cloud Run URL output in later steps
       - name: "Show output"

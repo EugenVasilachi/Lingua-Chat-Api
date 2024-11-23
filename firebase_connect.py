@@ -3,16 +3,25 @@ import json
 import requests
 import firebase_admin
 from firebase_admin import credentials, storage, firestore
+from google.cloud import secretmanager
 
-# cred_json = os.environ.get("FIREBASE_ADMIN_SDK_JSON")
-# if cred_json is None:
-#     raise ValueError("FIREBASE_ADMIN_SDK_JSON environment variable is not set")
 
-# cred_dict = json.loads(cred_json)
-# cred = credentials.Certificate(cred_dict)
+def get_firebase_credentials_from_secret():
+    client = secretmanager.SecretManagerServiceClient()
 
-firebase_admin.initialize_app({"storageBucket": "rebeldot-7a26b.appspot.com"})
-# firebase_admin.initialize_app(cred, {"storageBucket": "rebeldot-7a26b.appspot.com"})
+    secret_name = "projects/livechat-translation-442423/secrets/FIREBASE_ADMIN_SDK_JSON/versions/latest"
+
+    response = client.access_secret_version(name=secret_name)
+    secret_payload = response.payload.data.decode("UTF-8")
+
+    cred_dict = json.loads(secret_payload)
+    return credentials.Certificate(cred_dict)
+
+
+firebase_cred = get_firebase_credentials_from_secret()
+firebase_admin.initialize_app(
+    firebase_cred, {"storageBucket": "rebeldot-7a26b.appspot.com"}
+)
 
 bucket = storage.bucket()
 
