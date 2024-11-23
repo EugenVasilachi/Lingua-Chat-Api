@@ -4,14 +4,15 @@ import requests
 import firebase_admin
 from firebase_admin import credentials, storage, firestore
 
-cred_json = os.environ.get("FIREBASE_ADMIN_SDK_JSON")
-if cred_json is None:
-    raise ValueError("FIREBASE_ADMIN_SDK_JSON environment variable is not set")
+# cred_json = os.environ.get("FIREBASE_ADMIN_SDK_JSON")
+# if cred_json is None:
+#     raise ValueError("FIREBASE_ADMIN_SDK_JSON environment variable is not set")
 
-cred_dict = json.loads(cred_json)
-cred = credentials.Certificate(cred_dict)
+# cred_dict = json.loads(cred_json)
+# cred = credentials.Certificate(cred_dict)
 
-firebase_admin.initialize_app(cred, {"storageBucket": "rebeldot-7a26b.appspot.com"})
+firebase_admin.initialize_app({"storageBucket": "rebeldot-7a26b.appspot.com"})
+# firebase_admin.initialize_app(cred, {"storageBucket": "rebeldot-7a26b.appspot.com"})
 
 bucket = storage.bucket()
 
