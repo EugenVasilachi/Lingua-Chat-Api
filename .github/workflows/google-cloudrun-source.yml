@@ -63,6 +63,9 @@ jobs:
           name: "firebase-adminsdk.json"
           json: ${{ secrets.FIREBASE_ADMIN_SDK_JSON }}
 
+      - name: move-json
+        run: mv firebase-adminsdk.json ./app/
+
       # Configure Workload Identity Federation and generate an access token.
       #
       # See https://github.com/google-github-actions/auth for more options,
