@@ -81,6 +81,7 @@ jobs:
         with:
           service: "${{ env.SERVICE }}"
           region: "${{ env.REGION }}"
+          image: "gcr.io/${{ env.PROJECT_ID }}/$SERVICE:${{ github.sha }}"
           # NOTE: If using a different source folder, update the image name below:
           source: "./"
           env_vars: |
